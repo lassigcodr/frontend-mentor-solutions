@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Nunito";
+  src: url('./assets/fonts/Nunito/Nunito-VariableFont_wght.ttf') format("truetype-variations");
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url('./assets/fonts/Nunito_Sans/NunitoSans-VariableFont_wght.ttf') format("truetype-variations");
+  font-weight: 100 900;
+}
+
+@theme {
+  --font-nunito: "Nunito";
+  --font-nunito-sans: "Nunito Sans";
+
+  --color-white: #fff;
+  --color-neutral-100: #F6F5F1;
+  --color-neutral-200: #E9EDE8;
+  --color-neutral-300: #E0E6E3;
+  --color-neutral-400: #D0DCD9;
+  --color-neutral-800: #395852;
+  --color-neutral-900: #163A34;
+  --color-orange: #FE9F6B;
+  --color-teal: #49AC9B;
+  --color-indigo: #697DDB;
+  --color-strong-950: #293241;
+}
+
+.custom-bg {
+  background-image: url('./assets/images/pattern-fork.svg'), url('./assets/images/pattern-knife.svg');
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 468px) {
+  .custom-bg {
+    background-image: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .custom-bg {
+    background-position: -16px 92px, 553px -50px;
+    background-size: 140px 278.72px, 171.78px;
+  }
+}
+
+@media screen and (min-width: 769px)  {
+  .custom-bg {
+    background-position: -73px 23px, calc(100% + 70px) 24px;
+  }
+}
