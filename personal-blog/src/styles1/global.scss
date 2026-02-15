@@ -1,0 +1,47 @@
+@use "../styles/variables";
+@use "../styles/typography";
+@use "../styles/utilities";
+
+// Google Fonts (must stay as CSS import)
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Code:wght@300..700&display=swap");
+
+// Reset
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-sans; // was var(--font-sans)
+  // &[data-theme="dark"] {}
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Layout
+.container {
+  width: 40rem;
+  margin: 0 auto;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+}

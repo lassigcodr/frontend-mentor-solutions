@@ -1,0 +1,28 @@
+---
+const { link, image, alt } = Astro.props;
+---
+<div class="social-link-container">
+    <li>
+        <a href={link}>
+            <img src={image} alt={alt} class="icon-image">
+        </a>
+    </li>
+</div>
+
+<style>
+    .icon-image {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+    .social-link-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: var(--color-social-bg);
+        border-radius: 10px;
+        border: 1px solid var(--color-border);
+    }
+</style>

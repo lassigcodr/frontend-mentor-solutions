@@ -1,0 +1,75 @@
+---
+import articlesData from "../data/data.json"
+import MainLayout from "../layouts/MainLayout.astro"
+import Icon from "../components/Icon.astro"
+import ArticleListItem from "../components/ArticleListItem.astro"
+import socialLinks from "../js/socialsData"
+---
+
+<MainLayout>
+	<section class="hero-section">
+		<h1 class="page-title">
+			Hi, I'm Paulina 👋
+			<span class="visually-hidden">
+				Front-End Web Developer Learning Blog
+			</span>
+		</h1>
+		<p>
+			I'm on a journey to become a front-end web developer. I love building little projects, trying out new coding techniques, and sharing what I learn along the way. When I'm not at my desk, you'll find me reading, hiking through the mountains, or challenging myself on rock-climbing walls.
+		</p>
+		<p>
+			I started this blog to document my progress, keep myself accountable, and hopefully inspire anyone else who's learning to code. Welcome to my corner of the internet, and thanks for stopping by!
+		</p>
+		<ul class="social-links">
+			{
+				socialLinks.map(({ link, image, alt }) => (
+					<Icon link={link} image={image} alt={alt} />
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="article-section">
+		<h2 class="page-title">
+			Latest Articles
+		</h2>
+		<div class="article-list">
+			{
+				articlesData.slice(0, 5).map(({ title, slug, publishedAt }) => (
+					<ArticleListItem title={title} slug={slug} publishedAt={publishedAt} />
+				))
+			}
+		</div>
+	</section>
+
+	<a href="/blog" class="all-articles">View all articles</a>
+</MainLayout>
+
+<style>
+	.article-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-300);
+	}
+
+	.all-articles {
+		font-size: 1.125rem;
+		font-weight: var(--fw-medium);
+		line-height: 1.5;
+		letter-spacing: -0.5px;
+		color: var(--color-heading);
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+</style>

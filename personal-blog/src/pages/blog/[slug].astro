@@ -1,0 +1,23 @@
+---
+import { marked } from "marked";
+import articlesData from "../../data/data.json";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+    return articlesData.map((post) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+
+const { title, publishedAt, content } = post;
+const htmlContent = marked(content);
+---
+
+<MainLayout>
+    <h1>{title}</h1>
+    <p class="published-date">Published{publishedAt}</p>
+    <div class="content" set:html={htmlContent}></div>
+</MainLayout>

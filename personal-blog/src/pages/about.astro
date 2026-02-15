@@ -1,0 +1,100 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Icon from "../components/Icon.astro";
+import socialLinks from "../js/socialsData";
+---
+
+<MainLayout>
+    <section class="about-section">
+        <h1 class="page-title">About Me</h1>
+        <p>
+            Hi, I'm Paulina! Ever since I can remember, I've had a passion for
+            creativity and problem-solving. That's what led me to the world of
+            front-end web development. There's something magical about seeing
+            an idea come to life in the browser—whether it's a simple layout
+            experiment or a complex interface for a bigger project.
+        </p>
+        <p>
+            When I'm not coding, I love getting lost in a good book. My taste
+            is pretty eclectic: I'll happily read everything from fantasy novels
+            to biographies of tech pioneers. Reading helps me unwind and often
+            sparks new ideas for my coding projects.
+        </p>
+        <p>
+            Another big passion of mine is the great outdoors. Hiking allows
+            me to disconnect from the digital world and reconnect with nature.
+            I love challenging hikes with rewarding views at the top. And if I'm
+            not on the trails, you might catch me rock climbing. The combination
+            of mental focus and physical endurance is a perfect parallel to tackling
+            tough coding challenges!
+        </p>
+        <p>Some of my favorite books:</p>
+        
+        <div class="book-lists">
+            <ul>
+                <li><span>“The Pragmatic Programmer”</span> by Andrew Hunt and David Thomas (for helpful insights into software development)</li>
+                <li><span>“Ready Player One”</span> by Ernest Cline (for some futuristic escapism)</li>
+                <li><span>“The Hobbit”</span> by J.R.R. Tolkien (for a bit of fantasy fun)</li>
+                <li><span>“Educated”</span> by Tara Westover (for incredible inspiration)</li>
+            </ul>
+        </div>
+        <p>
+            I absolutely love my workspace as a place that inspires me to do my best
+            work, so I thought I'd share it with you:
+        </p>
+        <div class="about-image">
+            <picture>
+                <source srcset="/assets/images/image-workspace-large.jpg" media="(min-width: 601px)">
+                <img src="/assets/images/image-workspace-small.jpg" alt="image of workspace" class="about-image" loading="lazy" />
+            </picture>
+        </div>
+        <p>
+            I hope this blog not only documents my growth but also helps others see
+            that coding can be for everyone. Thanks for joining me on this journey!
+        </p>
+    </section>
+
+    <section class="follow-section">
+        <h2 class="section-title">Follow Me</h2>
+        <ul class="social-links">
+			{
+				socialLinks.map(({ link, image, alt }) => (
+					<Icon link={link} image={image} alt={alt} />
+				))
+			}
+		</ul>
+    </section>
+</MainLayout>
+
+<style>
+    .book-lists {
+        padding-left: var(--space-100);
+    }
+
+    .book-lists ul {
+        width: 100%;
+        list-style: disc;
+        padding-left: var(--space-200);
+    }
+
+    .book-lists li {
+        color: var(--color-body);
+        font-size: 1.125rem;
+        font-weight: var(--fw-regular);
+        line-height: 1.5;
+        letter-spacing: -0.2px;
+    }
+
+    .book-lists li span {
+        font-weight: var(--fw-bold);
+    }
+
+    .about-image-container {
+        width: 100%;
+    }
+
+    .about-image {
+        width: 100%;
+        border-radius: 12px;
+    }
+</style>

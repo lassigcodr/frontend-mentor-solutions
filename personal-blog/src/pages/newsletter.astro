@@ -1,0 +1,122 @@
+---
+import MainLayout from "../layouts/MainLayout.astro"
+---
+
+<MainLayout>
+    <section class="newsletter-section">
+        <h1 class="page-title">Newsletter</h1>
+        <p>
+            Want to stay updated on my latest articles, coding tutorials, and personal
+            adventures? Sign up for my newsletter! It's a simple way to keep track of
+            new posts and occasional coding tips I discover. Just drop your email in
+            the sign-up box, and I'll send you updates whenever there's something new
+            to share.
+        </p>
+
+        <p class="cta-description">
+            I'd love to have you along for the ride and also hear about your own journey!
+        </p>
+
+        <div class="form-container">
+            <form action="#" method="post" class="form">
+                <div class="form-input-wrapper">
+                    <label for="email" class="form-input-label">Email Address</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        id="email" 
+                        placeholder="email@example.com"
+                        class="form-input" 
+                        required 
+                    />
+                    <!-- <span class="">{message}</span> -->
+                </div>
+                <button type="submit" class="form-submit-btn">Stay updated</button>
+            </form>
+        </div>
+
+        <p class="newsletter-footer">Unsubscribe anytime. No spam, I promise 🙂</p>
+    </section>
+
+</MainLayout>
+
+<style>
+    .cta-description {
+        font-size: 1.25rem;
+        font-weight: var(--fw-semibold);
+        line-height: 1.3;
+        letter-spacing: -0.5px;
+        color: var(--color-heading);
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-200);
+    }
+
+    .form-input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-075);
+    }
+
+    .form-input-label {
+        font-size: 1.125rem;
+        font-weight: var(--fw-regular);
+        line-height: 1.5;
+        letter-spacing: -0.2px;
+        color: var(--color-heading);
+    }
+
+    .form-input {
+        width: 100%;
+        padding: var(--space-150) var(--space-200);
+        background-color: var(--color-input-bg);
+        color: var(--color-body);
+        border: 1px solid var(--color-input-border);
+        border-radius: 0.625rem;
+    }
+
+    .form-input:hover {
+        background-color: var(--color-input-bg-hover);
+    }
+
+    .form-input:focus,
+    .form-input:active {
+        outline: 2px solid var(--color-focus-outline);
+        outline-offset: 2px;
+        background-color: var(--color-input-bg-hover);
+    }
+
+    .form-submit-btn {
+        align-self: flex-start;
+        padding: var(--space-150) var(--space-300);
+        background-color: var(--color-submit-button-bg);
+        color: var(--color-submit-button-text);
+        font-size: 1.125rem;
+        font-weight: var(--fw-medium);
+        line-height: 1.5;
+        letter-spacing: -0.5px;
+        border: none;
+        border-radius: 0.625rem;
+        cursor: pointer;
+    }
+
+    .form-submit-btn:hover {
+        background-color: var(--color-submit-button-hover-bg);
+        cursor: pointer;
+    }
+
+    .form-submit-btn:focus, 
+    .form-submit-btn:active {
+        outline: 2px solid var(--color-focus-outline);
+        outline-offset: 2px;
+    }
+
+    .newsletter-footer {
+        font-size: 1rem;
+        line-height: 1.3;
+        letter-spacing: -0.2px;
+    }
+</style>

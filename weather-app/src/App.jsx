@@ -15,6 +15,9 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState(null)
   const [hourlyWeather, setHourlyWeather] = useState(null);
   const [dailyWeather, setDailyWeather] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
+  const [searchResults, setSearchResults] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null);
 
   useEffect(() => {
     async function success(pos) {
@@ -57,6 +60,48 @@ function App() {
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, [])
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const fetchCity = async () => {
+      try {
+        const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${searchValue}&count=4&language=en&format=json`);
+        const data = await res.json()
+        
+        setSearchResults(data.results)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchCity();
+  }
+
+  async function handleSelectPlace(e) {
+    const id = e.target.getAttribute('data-city-id');
+    const place = searchResults.filter(city => city.id === parseInt(id))[0];
+
+    setSelectedPlace({
+      id: place.id,
+      name: place.name,
+      country: place.country,
+      latitude: place.latitude,
+      longitude: place.longitude,
+      population: place.population,
+      timezone: place.timezone
+    });
+
+    
+    const data = await getWeatherData(selectedPlace.latitude, selectedPlace.longitude, selectedPlace.timezone)
+    const {currentWeather, hourlyWeather, dailyWeather} = data;
+    setCurrentWeather(currentWeather);
+    setHourlyWeather(hourlyWeather);
+    setDailyWeather(dailyWeather);
+    setPlace(selectedPlace.name);
+    setCountry(selectedPlace.country);
+    setSearchResults(null);
+  }
+
   let content = (
     <section className='grid grid-cols-1 lg:grid-cols-[auto_384px] gap-8'>
       <CurrentDailyForecast place={place} country={country} current={currentWeather} dailyWeather={dailyWeather} />
@@ -77,7 +122,7 @@ function App() {
         How's the sky looking today?
       </p>
 
-      <Search />
+      <Search handleSubmit={handleSubmit} searchValue={searchValue} handleInput={(e) => setSearchValue(e.target.value)} searchResults={searchResults} handleSelectPlace={handleSelectPlace} />
 
       {content}
 

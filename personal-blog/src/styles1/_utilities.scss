@@ -1,0 +1,82 @@
+/* ===============================
+   BREAKPOINTS
+================================ */
+
+$breakpoints: (
+  md: 768px,
+  lg: 1024px
+);
+
+/* ===============================
+   SPACING SCALE
+================================ */
+
+$spaces: 0, 025, 050, 075, 100, 150, 200, 250, 300, 400, 500, 600, 800, 1000;
+
+/* ===============================
+   MIXINS
+================================ */
+
+@mixin respond($bp) {
+  @media (min-width: map-get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+/* ===============================
+   BASE (MOBILE-FIRST)
+================================ */
+
+@each $s in $spaces {
+  /* margin */
+  .m-#{$s} { margin: var(--spacing-#{$s}); }
+  .mt-#{$s} { margin-top: var(--spacing-#{$s}); }
+  .mr-#{$s} { margin-right: var(--spacing-#{$s}); }
+  .mb-#{$s} { margin-bottom: var(--spacing-#{$s}); }
+  .ml-#{$s} { margin-left: var(--spacing-#{$s}); }
+  .mx-#{$s} { margin-left: var(--spacing-#{$s}); margin-right: var(--spacing-#{$s}); }
+  .my-#{$s} { margin-top: var(--spacing-#{$s}); margin-bottom: var(--spacing-#{$s}); }
+
+  /* padding */
+  .p-#{$s} { padding: var(--spacing-#{$s}); }
+  .pt-#{$s} { padding-top: var(--spacing-#{$s}); }
+  .pr-#{$s} { padding-right: var(--spacing-#{$s}); }
+  .pb-#{$s} { padding-bottom: var(--spacing-#{$s}); }
+  .pl-#{$s} { padding-left: var(--spacing-#{$s}); }
+  .px-#{$s} { padding-left: var(--spacing-#{$s}); padding-right: var(--spacing-#{$s}); }
+  .py-#{$s} { padding-top: var(--spacing-#{$s}); padding-bottom: var(--spacing-#{$s}); }
+
+  /* gap */
+  .gap-#{$s} { gap: var(--spacing-#{$s}); }
+}
+
+/* ===============================
+   BREAKPOINT UTILITIES
+================================ */
+
+@each $bp, $width in $breakpoints {
+  @include respond($bp) {
+    @each $s in $spaces {
+      /* margin */
+      .#{$bp}\:m-#{$s} { margin: var(--spacing-#{$s}); }
+      .#{$bp}\:mt-#{$s} { margin-top: var(--spacing-#{$s}); }
+      .#{$bp}\:mr-#{$s} { margin-right: var(--spacing-#{$s}); }
+      .#{$bp}\:mb-#{$s} { margin-bottom: var(--spacing-#{$s}); }
+      .#{$bp}\:ml-#{$s} { margin-left: var(--spacing-#{$s}); }
+      .#{$bp}\:mx-#{$s} { margin-left: var(--spacing-#{$s}); margin-right: var(--spacing-#{$s}); }
+      .#{$bp}\:my-#{$s} { margin-top: var(--spacing-#{$s}); margin-bottom: var(--spacing-#{$s}); }
+
+      /* padding */
+      .#{$bp}\:p-#{$s} { padding: var(--spacing-#{$s}); }
+      .#{$bp}\:pt-#{$s} { padding-top: var(--spacing-#{$s}); }
+      .#{$bp}\:pr-#{$s} { padding-right: var(--spacing-#{$s}); }
+      .#{$bp}\:pb-#{$s} { padding-bottom: var(--spacing-#{$s}); }
+      .#{$bp}\:pl-#{$s} { padding-left: var(--spacing-#{$s}); }
+      .#{$bp}\:px-#{$s} { padding-left: var(--spacing-#{$s}); padding-right: var(--spacing-#{$s}); }
+      .#{$bp}\:py-#{$s} { padding-top: var(--spacing-#{$s}); padding-bottom: var(--spacing-#{$s}); }
+
+      /* gap */
+      .#{$bp}\:gap-#{$s} { gap: var(--spacing-#{$s}); }
+    }
+  }
+}

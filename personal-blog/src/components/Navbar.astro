@@ -1,0 +1,208 @@
+---
+import navData from "../js/navData";
+---
+
+<nav class="navbar">
+    <div class="logo-image-container">
+        <img src="/assets/images/image-avatar.jpg" alt="Avatar image" class="logo-image" />
+    </div>
+
+    <div class="menu">
+        <ul class="nav-links">
+            {
+                navData.map(item => (
+                    <li><a href={item.link}>{item.text}</a></li>
+                ))
+            }
+        </ul>
+    
+        <button class="nav-toggle" id="nav-toggle-id" aria-label="Toggle navigation menu" >
+            <span class="hamburger"></span>
+        </button>
+    
+        <button class="theme-toggle" id="theme-toggle-id" aria-label="Toggle theme">
+            <span class="theme-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<ul class="nav-links-mobile" id="nav-links-mobile-id">
+    {
+        navData.map(item => (
+            <li><a href={item.link}>{item.text}</a></li>
+        ))
+    }
+</ul>
+
+<style>
+    .navbar {
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-075);
+        background-color: var(--color-nav-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 0.625rem;
+    }
+    
+    .logo-image-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo-image {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.625rem;
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+        gap: var(--space-250);
+    }
+
+    .nav-toggle,
+    .theme-toggle {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: transparent;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .theme-toggle {
+        background-color: var(--color-bg);
+        border: 1px solid var(--color-border);
+    }
+
+    .hamburger {
+        background-image: url('/assets/images/icon-menu.svg');
+        background-repeat: no-repeat;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .nav-toggle.open {
+        background-color: var(--color-close-bg);
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links-mobile {
+        display: none;
+        margin-top: var(--space-150);
+        padding: var(--space-075) var(--space-150);
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        background-color: var(--color-nav-bg);
+        position: relative;
+    }
+
+    .nav-links-mobile::before {
+		content: "";
+		position: absolute;
+        top: -15px;
+        left: 5px;
+		height: 15px;
+        width: calc(100% - 12px);
+		border-left: 1px solid var(--color-border);
+		border-right: 1px solid var(--color-border);
+		pointer-events: none;
+        z-index: -1;
+	}
+
+    .nav-links-mobile li {
+        padding: var(--space-075) 0;
+        color: var(--color-body);
+        font-size: 1.125rem;
+        line-height: 1.5;
+        letter-spacing: -0.5px;
+    }
+
+    .nav-links-mobile li:not(:last-child) {
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-links-mobile.open {
+        display: block;
+    }
+
+    .nav-toggle.open .hamburger {
+        background-image: url('/assets/images/icon-menu-close.svg');
+    }
+
+    .theme-icon {
+        background-image: url('/assets/images/icon-moon.svg');
+        background-repeat: no-repeat;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .theme-toggle.dark .theme-icon {
+        background-image: url('/assets/images/icon-sun.svg');
+    }
+
+
+    @media (min-width: 48rem) {
+        .navbar {
+            width: 40rem;
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .nav-toggle {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-300);
+        }
+
+        .nav-links li {
+            font-size: 1rem;
+            line-height: 1.3rem;
+            letter-spacing: -0.2px;
+            color: var(--color-heading);
+        }
+
+        .nav-links-mobile {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+const navBtn = document.getElementById("nav-toggle-id");
+const themeBtn = document.getElementById("theme-toggle-id");
+
+navBtn?.addEventListener("click", function() {
+    navBtn.classList.toggle("open");
+    const mobileMenu = document.getElementById("nav-links-mobile-id");
+    mobileMenu?.classList.toggle("open");
+});
+
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+    themeBtn?.classList.add("dark");
+}
+
+themeBtn?.addEventListener("click", function() {
+    const isDark = document.body.classList.toggle("dark-theme");
+    themeBtn.classList.toggle("dark", isDark);
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+});
+</script>

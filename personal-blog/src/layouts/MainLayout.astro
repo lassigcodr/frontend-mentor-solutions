@@ -1,0 +1,66 @@
+---
+import Navbar from "../components/Navbar.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" href="/favicon-32x32.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Frontend Mentor | Personal blog</title>
+	</head>
+	<body class="body-wrapper">
+		<Navbar />
+        <main class="main-container">
+            <slot />
+        </main>
+		<!-- Footer -->
+	</body>
+</html>
+
+<style>
+	.body-wrapper {
+		padding: var(--space-200);
+	}
+
+	.main-container {
+		max-width: calc(100% - 10px);
+		margin: 0 auto;
+		padding: 0 var(--space-100);
+		background-color: var(--color-bg);
+		border-left: 1px solid var(--color-border);
+		border-right: 1px solid var(--color-border);
+		position: relative;
+	}
+
+	.main-container::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		margin: -1px;
+		border-left: 1px solid var(--color-border);
+		border-right: 1px solid var(--color-border);
+		pointer-events: none;
+	}
+
+
+	@media (min-width: 48rem) {
+		.body-wrapper {
+			padding: var(--space-250) 0;
+		}
+
+		.main-container {
+			max-width: 39.375rem;
+			padding: 0 var(--space-250);
+		}
+	}
+
+	@media (min-width: 64rem) {
+		.body-wrapper {
+			padding: var(--space-250) 0 var(--space-400) 0;
+		}
+	}
+</style>
